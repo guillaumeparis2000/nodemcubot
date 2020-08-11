@@ -1,9 +1,6 @@
 #include <ESP8266NetBIOS.h>
-#include <ESP8266WiFi.h>
-#include <PubSubClient.h> // Connect and publish to the MQTT broker
 #include <Utilities.h>
 #include <EEPROM.h>
-#include "secrets.h"
 #include "globals.h"
 
 void initConfig() {
