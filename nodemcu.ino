@@ -5,8 +5,10 @@
 #include "peripherals.h"
 #include "scheduler.h"
 #include "display.h"
+#include "mqtt.h"
 #include "secrets.h"
 #include "globals.h"
+
 
 // Global objects
 uint ticks=0;
@@ -20,7 +22,7 @@ void setup() {
   initDisplay();
   initNTPClient();
   initSensors();
-  initTelegramBot();
+
   initMDNS();
 
   updateNTPClientTime();
@@ -28,32 +30,35 @@ void setup() {
   getMoistureMesures();
   printWeatherInfo();
 
-  initWebServerRouter();
-
   initConfig();
 
 }
 
 void loop() {
 
-  if ((ticks % EVERY_10_SECONDS)==0) {
-    getInfoFromSensors();
-    getMoistureMesures();
-    printWeatherInfo();
-  }
+    if ((ticks % EVERY_30_MINUTES)==0) {
+      getInfoFromSensors();
+      getMoistureMesures();
+      connect_MQTT();
+      printWeatherInfo();
 
-  if ((ticks % EVERY_6_SECONDS)==0) {
-    handleBotMessages();
-  }
+      publishData();
 
-  if ((ticks % EVERY_1_HOUR)==0) {
-    updateNTPClientTime();
-    Serial.println("Get time from internet " +getTimeFormatted());
-  }
+      // Serial.println("Closing WiFi connection...");
+      // WiFi.disconnect();
 
-  webServerDoStuff();
+      // delay(100);
+
+      // Serial.println("Entering deep sleep mode for " + SLEEP_DELAY_IN_SECONDS);
+      // ESP.deepSleep(SLEEP_DELAY_IN_SECONDS * 1000000, WAKE_RF_DEFAULT);
+      // delay(500);   // wait for deep sleep to happen
+    }
+
+    if ((ticks % EVERY_1_HOUR)==0) {
+      updateNTPClientTime();
+      Serial.println("Get time from internet " +getTimeFormatted());
+    }
 
   ticks ++;
   delay(LOOPSLEEP);
-
 }

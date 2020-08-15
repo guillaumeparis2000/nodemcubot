@@ -11,9 +11,9 @@ void initConfig() {
   Serial.printf("CPU Frequency: %u MHz\n", ESP.getCpuFreqMHz());
   Serial.printf("Reset reason: %s\n", ESP.getResetReason().c_str());
   Serial.printf("Chip ID: %u\n\n", ESP.getFlashChipId());
-  
+
   // TODO read confguration from Serial
-  // TODO wait for two seconds to press F11 and enter 
+  // TODO wait for two seconds to press F11 and enter
   // TODO   configuration mode in case already configured
   /*loadCredentials();
 
@@ -27,7 +27,7 @@ void initConfig() {
     ssid = getStringSerial("\nInsert wifi ssid: ");
     password = getStringSerial("\nInsert wifi password: ");
   }*/
-  
+
 }
 
 String getStringSerial(String ask) {
@@ -46,7 +46,7 @@ String getStringSerial(String ask) {
             }
             res = res + ch;
         }
-        delay(2); 
+        delay(2);
     }
 
     return res;

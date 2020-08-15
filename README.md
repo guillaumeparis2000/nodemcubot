@@ -20,7 +20,7 @@
 - Rename file secrets.h_dist -> secrets.h changing all definitions
 - Connect nodemcu using usb to the computer
 - Configure Arduino Board to "nodeMCU v1.0"
-- Select port (e.g. maybe /dev/ttyUSB0 on linux // maybe /dev/cu_.... on mac)
+- Select port (e.g. maybe /dev/ttyUSB0 on linux // maybe /dev/cu\_.... on mac)
 - Upload Sketch to nodeMCU ¹
 - Open Serial Monitor
 - Test if messages are sent to the serial port and the OLED screen show information

@@ -22,5 +22,5 @@ void getMoistureMesures() {
   // Serial.print("Moisture : ");
   // Serial.print(output_value);
   // Serial.print("\n");
-  moisture_level = map(output_value,561,330,0,100);
+  moisture_level = map(output_value,0,1023,0,100);
 }
